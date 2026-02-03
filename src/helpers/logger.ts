@@ -1,5 +1,5 @@
 import chalk from "chalk";
-import type { ColoredSegment } from "./constants";
+import type { ColoredSegment } from "../types";
 
 const timestamp = (): string => {
   const now = new Date();
@@ -52,7 +52,7 @@ type LogArgs = unknown[];
  *   Displays data in a formatted console table.
  */
 
-export const logger = {
+const logger = {
   info: (...args: LogArgs) => {
     console.log(`${chalk.blue(chalk.bold("[INFO]"))} ${timestamp()} →`, chalk.cyan(...args));
   },
@@ -120,3 +120,5 @@ export const logger = {
     console.table(obj);
   },
 };
+
+export default logger;

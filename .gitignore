@@ -28,5 +28,7 @@ coverage
 *.sln
 *.sw?
 
+.gitsentryrc
+
 *.tsbuildinfo
 package-lock.json

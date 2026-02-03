@@ -1,4 +1,7 @@
-import type chalk from "chalk";
+/**
+ * GitSentry File Name
+ */
+export const GIT_SENTRY_FILE_NAME = ".gitsentryrc";
 
 /**
  * List of git hooks supported by the plugins
@@ -18,14 +21,3 @@ export const HOOKS: string[] = [
   "applypatch-msg",
   "pre-auto-gc",
 ];
-
-/**
- * Interface for segment colors logger
- */
-export interface ColoredSegment {
-  text: string;
-  color?: keyof typeof chalk;
-  bgColor?: keyof typeof chalk;
-  bold?: boolean;
-  underline?: boolean;
-}
