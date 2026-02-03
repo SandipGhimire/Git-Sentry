@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 import { Command } from "commander";
+import { logger } from "./helpers/logger";
 
 const program = new Command();
 
@@ -10,7 +11,7 @@ program
   .description("Run the configured hooks")
   .argument("<hook>", "git hook name")
   .action((hook: string) => {
-    console.log("test", hook);
+    logger.info("test", hook);
     process.exit(1);
   });
 
