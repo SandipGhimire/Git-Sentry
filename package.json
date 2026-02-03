@@ -1,0 +1,45 @@
+{
+  "name": "git-sentry",
+  "private": true,
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "files": [
+    "dist"
+  ],
+  "engines": {
+    "node": ">=24"
+  },
+  "license": "MIT",
+  "author": "Sandip Ghimire",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "bin": {
+    "git-sentry": "dist/index.js"
+  },
+  "scripts": {
+    "prebuild": "pnpm run lint",
+    "build": "tsc --emitDeclarationOnly && esbuild src/index.ts --bundle --platform=node --format=esm --packages=external --outfile=dist/index.js",
+    "lint": "eslint src --max-warnings 0 --flag unstable_native_nodejs_ts_config",
+    "lint:fix": "eslint src --max-warnings 0 --fix --flag unstable_native_nodejs_ts_config",
+    "format": "prettier --write src/"
+  },
+  "dependencies": {
+    "chalk": "^5.6.2",
+    "commander": "^14.0.3"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.2",
+    "@types/node": "^24.10.8",
+    "@typescript-eslint/eslint-plugin": "^8.53.0",
+    "@typescript-eslint/parser": "^8.53.0",
+    "esbuild": "^0.27.2",
+    "eslint": "^9.39.2",
+    "eslint-plugin-prettier": "^5.5.5",
+    "prettier": "^3.7.4",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.53.0"
+  },
+  "keywords": []
+}
