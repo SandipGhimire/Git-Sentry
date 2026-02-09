@@ -5,6 +5,13 @@ import type chalk from "chalk";
  */
 export interface HookOptions {
   parallel?: boolean;
+  failFast?: boolean;
+  timeout?: number;
+  ignoreErrors?: boolean;
+  branches?: string[];
+  skipIfMessageContains?: string;
+  cwd?: string;
+  verbose?: boolean;
 }
 
 /**
@@ -31,4 +38,23 @@ export interface ColoredSegment {
   bgColor?: keyof typeof chalk;
   bold?: boolean;
   underline?: boolean;
+}
+
+/**
+ * Interface for init hook results
+ */
+export interface HookResult {
+  hook: string;
+  status: "created" | "appended" | "exists" | "failed";
+  message: string;
+}
+
+/**
+ * Interface for command results
+ */
+export interface CommandResult {
+  command: string;
+  status: "success" | "failed" | "skipped";
+  duration: number;
+  error?: string;
 }
