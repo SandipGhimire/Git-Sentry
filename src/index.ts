@@ -17,7 +17,7 @@ program
     checkGit();
     checkHook(hook);
     await executeCommand(hook);
-    process.exit(1);
+    process.exit(0);
   });
 
 program
@@ -26,7 +26,7 @@ program
   .action(() => {
     checkGit();
     initPlugin();
-    process.exit(1);
+    process.exit(0);
   });
 
 program.parse();
