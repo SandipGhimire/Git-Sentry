@@ -1,12 +1,12 @@
-# GitSentry
+# Git-Sentry
 
-[![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](file:///media/sandipghimire/ClydeSan/SandipGhimire/GitSentry/GitSentry/LICENSE)
+[![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://github.com/SandipGhimire/Git-Sentry/blob/master/LICENSE)
 [![Docs](https://img.shields.io/badge/Docs-Official%20Wiki-blue)](https://gitsentry.sandip-ghimire.com.np)
 [![GitHub](https://img.shields.io/badge/GitHub-Repository-black)](https://github.com/SandipGhimire/Git-Sentry)
 
 ## Overview
 
-**GitSentry** is a lightweight, configuration-driven Git hooks manager for modern development workflows. It allows you to define, manage, and execute commands across any Git hook using a simple JSON configuration file.
+**Git-Sentry** is a lightweight, configuration-driven Git hooks manager for modern development workflows. It allows you to define, manage, and execute commands across any Git hook using a simple JSON configuration file.
 
 ## Features
 
@@ -27,7 +27,7 @@ pnpm add git-sentry -D
 
 ## Quick Start
 
-1. **Initialize GitSentry** in your project:
+1. **Initialize Git-Sentry** in your project:
 
    ```sh
    npx git-sentry init
@@ -51,7 +51,7 @@ pnpm add git-sentry -D
    }
    ```
 
-3. **Automate Setup**: Add GitSentry to your `package.json` scripts to ensure hooks are automatically initialized for all contributors:
+3. **Automate Setup**: Add Git-Sentry to your `package.json` scripts to ensure hooks are automatically initialized for all contributors:
 
    ```json
    {
@@ -71,4 +71,4 @@ For a deep dive into all available options and advanced configurations, visit ou
 
 ## License
 
-[MIT](file:///media/sandipghimire/ClydeSan/SandipGhimire/GitSentry/GitSentry/LICENSE) © [Sandip Ghimire](https://github.com/SandipGhimire)
+[MIT](https://github.com/SandipGhimire/Git-Sentry/blob/master/LICENSE) © [Sandip Ghimire](https://github.com/SandipGhimire)

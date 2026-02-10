@@ -1,5 +1,5 @@
 /**
- * GitSentry File Name
+ * Git-Sentry File Name
  */
 export const GIT_SENTRY_FILE_NAME = ".gitsentryrc";
 

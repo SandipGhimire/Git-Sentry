@@ -5,7 +5,7 @@ import logger from "../logger";
 import { GIT_SENTRY_FILE_NAME } from "../constants";
 
 /**
- * Retrieves the GitSentry configuration from a file in the given directory.
+ * Retrieves the Git-Sentry configuration from a file in the given directory.
  *
  * @param {string} [crrPath=process.cwd()] - The directory to look for the config file. Defaults to the current working directory.
  * @returns {GitSentryConfig} The parsed configuration object, or exits the process if the file is not found.
