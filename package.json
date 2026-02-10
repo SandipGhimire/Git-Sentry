@@ -1,8 +1,16 @@
 {
   "name": "git-sentry",
   "private": true,
-  "version": "1.0.0",
-  "description": "",
+  "version": "1.0.1",
+  "description": "Configuration-driven Git hooks manager for modern development workflows.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SandipGhimire/Git-Sentry.git"
+  },
+  "bugs": {
+    "url": "https://github.com/SandipGhimire/Git-Sentry/issues"
+  },
+  "homepage": "https://gitsentry.sandip-ghimire.com.np",
   "type": "module",
   "files": [
     "dist"

@@ -69,6 +69,10 @@ pnpm add git-sentry -D
 
 For a deep dive into all available options and advanced configurations, visit our **[Official Wiki](https://gitsentry.sandip-ghimire.com.np)**.
 
+## Contributing
+
+Contributions are welcome! Please see our **[CONTRIBUTING.md](CONTRIBUTING.md)** for details on how to get started, report bugs, and submit features.
+
 ## License
 
 [MIT](https://github.com/SandipGhimire/Git-Sentry/blob/master/LICENSE) © [Sandip Ghimire](https://github.com/SandipGhimire)
