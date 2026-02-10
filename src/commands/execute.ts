@@ -14,7 +14,6 @@ import { type HookConfig } from "@/types";
  */
 const executeCommand = async (hook: string) => {
   const config = getConfigValue();
-  if (!config) return;
   const hookDetail = config.hooks[hook] as HookConfig | null;
   if (!hookDetail) return;
   if (hookDetail.commands.length === 0) return;

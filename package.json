@@ -22,7 +22,8 @@
     "build": "tsc --emitDeclarationOnly && esbuild src/index.ts --bundle --platform=node --format=esm --packages=external --outfile=dist/index.js",
     "lint": "eslint src --max-warnings 0 --flag unstable_native_nodejs_ts_config",
     "lint:fix": "eslint src --max-warnings 0 --fix --flag unstable_native_nodejs_ts_config",
-    "format": "prettier --write src/"
+    "format": "prettier --write src/",
+    "test": "vitest run"
   },
   "dependencies": {
     "chalk": "^5.6.2",
@@ -33,13 +34,15 @@
     "@types/node": "^24.10.8",
     "@typescript-eslint/eslint-plugin": "^8.53.0",
     "@typescript-eslint/parser": "^8.53.0",
+    "@vitest/coverage-v8": "^4.0.18",
     "esbuild": "^0.27.2",
     "eslint": "^9.39.2",
     "eslint-plugin-prettier": "^5.5.5",
     "prettier": "^3.7.4",
     "ts-node": "^10.9.2",
     "typescript": "^5.9.3",
-    "typescript-eslint": "^8.53.0"
+    "typescript-eslint": "^8.53.0",
+    "vitest": "^4.0.18"
   },
   "keywords": []
 }
