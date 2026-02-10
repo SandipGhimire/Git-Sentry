@@ -15,12 +15,13 @@ let spinnerInterval: NodeJS.Timeout | undefined;
  * Starts the spinner
  * @param {string} text - The text to display with the spinner
  */
-const startSpinner = (text = "Executing commands…") => {
+const startSpinner = (text = "Executing commands") => {
   stopSpinner();
   spinnerInterval = setInterval(() => {
     const frame = spinnerFrames[spinnerIndex % spinnerFrames.length];
+    const frame2 = ["", ".", "..", "..."][spinnerIndex % 4];
     spinnerIndex++;
-    process.stdout.write(`\r\x1b[2K${frame} ${text}`);
+    process.stdout.write(`\r\x1b[2K${frame} ${text}${frame2}`);
   }, 100);
 };
 

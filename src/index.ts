@@ -1,7 +1,6 @@
 #!/usr/bin/env node
 
 import { Command } from "commander";
-import { startSpinner, stopSpinner } from "./helpers/utils/spinner";
 import executeCommand from "./commands/execute";
 import initPlugin from "./commands/init";
 import { checkGit, checkHook } from "./helpers/utils/git";
@@ -17,11 +16,7 @@ program
   .action(async (hook: string) => {
     checkGit();
     checkHook(hook);
-
-    startSpinner();
     await executeCommand(hook);
-    stopSpinner();
-
     process.exit(1);
   });
 
@@ -30,11 +25,7 @@ program
   .description("Initialize Git Sentry")
   .action(() => {
     checkGit();
-
-    startSpinner();
     initPlugin();
-    stopSpinner();
-
     process.exit(1);
   });
 

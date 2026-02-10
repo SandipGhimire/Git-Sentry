@@ -8,6 +8,16 @@ import { HOOKS } from "../constants";
 import { startSpinner, stopSpinner } from "./spinner";
 
 /**
+ * Formats a duration in milliseconds into a human-readable string.
+ *
+ * @param {number} ms - Time in milliseconds.
+ * @returns {string} Formatted time string in milliseconds or seconds.
+ */
+const formatTime = (ms: number): string => {
+  return ms < 1000 ? `${String(ms)}ms` : `${(ms / 1000).toFixed(2)}s`;
+};
+
+/**
  * Executes a single shell command.
  *
  * @param {string} command - The command to execute.
@@ -19,11 +29,55 @@ const runCommand = async (command: string, cwd?: string, timeout?: number, verbo
   return new Promise<void>((resolve, reject) => {
     const runner = spawn(command, {
       shell: true,
-      stdio: verbose ? "inherit" : "ignore",
+      stdio: "pipe",
       cwd: cwd ?? process.cwd(),
     });
 
     let timer: NodeJS.Timeout | undefined;
+
+    if (verbose) {
+      logger.color("cyan", "");
+      let buffer = "";
+      runner.stdout.on("data", (chunk: string) => {
+        buffer += chunk;
+
+        const lines = buffer.split(/\r?\n/);
+        buffer = lines.pop() ?? "";
+
+        for (const line of lines) {
+          logger.segmentColor([
+            {
+              color: "yellow",
+              text: `${command} │ `,
+            },
+            {
+              color: "green",
+              text: line,
+            },
+          ]);
+        }
+      });
+
+      runner.stderr.on("data", (chunk: string) => {
+        buffer += chunk;
+
+        const lines = buffer.split(/\r?\n/);
+        buffer = lines.pop() ?? "";
+
+        for (const line of lines) {
+          logger.segmentColor([
+            {
+              color: "yellow",
+              text: `${command} │ `,
+            },
+            {
+              color: "red",
+              text: line,
+            },
+          ]);
+        }
+      });
+    }
 
     if (Number(timeout)) {
       timer = setTimeout(() => {
@@ -96,7 +150,10 @@ const runCommands = async (commands: string[], options?: HookOptions) => {
   };
 
   try {
-    startSpinner();
+    if (options?.verbose !== true) {
+      startSpinner();
+    }
+
     if (isParallel) {
       if (failFast) {
         logger.warn("failFast is ignored in parallel mode; all commands will run");
@@ -121,9 +178,12 @@ const runCommands = async (commands: string[], options?: HookOptions) => {
   } finally {
     stopSpinner();
   }
+  const totalTime = results.reduce((sum, r) => sum + r.duration, 0);
+  const successCount = results.filter((r) => r.status === "success").length;
+  const failedCount = results.filter((r) => r.status === "failed").length;
 
   logger.color("cyan", "");
-  logger.info("═══════ Hook Execution Summary ═══════");
+  logger.color("cyan", "═══════ Hook Execution Summary ═══════");
   results.forEach((res) => {
     const statusIcon = res.status === "success" ? "[✔]" : res.status === "skipped" ? "[⚠︎]" : "[✗]";
     const color = res.status === "success" ? "green" : res.status === "skipped" ? "yellow" : "red";
@@ -131,17 +191,42 @@ const runCommands = async (commands: string[], options?: HookOptions) => {
     logger.segmentColor([
       {
         color: color,
-        text: `               ${statusIcon}`,
+        text: statusIcon,
       },
       {
         color: "cyan",
-        text: ` ${res.command} — ${String(res.duration)}ms`,
+        text: ` ${res.command} — ${formatTime(res.duration)}`,
       },
     ]);
-    if (res.error !== undefined) logger.color("red", `                ⤷ Error: ${res.error}`);
+    if (res.error !== undefined) logger.color("red", `⤷ Error: ${res.error}`);
   });
-  logger.info("══════════════════════════════════════");
-  logger.color("cyan", "");
+  logger.segmentColor([
+    {
+      color: "cyan",
+      text: `\nTotal: ${String(results.length)} commands executed`,
+    },
+    {
+      color: "cyan",
+      text: "\n⤷ ",
+    },
+    {
+      color: "green",
+      text: `${String(successCount)} succeeded`,
+    },
+    {
+      color: "cyan",
+      text: ` / `,
+    },
+    {
+      color: "red",
+      text: `${String(failedCount)} failed`,
+    },
+    {
+      color: "cyan",
+      text: `\n⤷ Time: ${formatTime(totalTime)}`,
+    },
+  ]);
+  logger.color("cyan", "══════════════════════════════════════\n");
 
   if (results.some((r) => r.status === "failed") && !ignoreErrors) {
     process.exit(1);
