@@ -1,6 +1,6 @@
-import { runCommands } from "@/helpers/utils/commands";
-import { getConfigValue } from "@/helpers/utils/config";
-import { type HookConfig } from "@/types";
+import { runCommands } from "../helpers/utils/commands";
+import { getConfigValue } from "../helpers/utils/config";
+import { type HookConfig } from "../types";
 
 /**
  * Executes configured commands for a specific Git hook.
