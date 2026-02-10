@@ -1,10 +1,10 @@
-import type { CommandResult, HookOptions, HookResult } from "@/types";
+import type { CommandResult, HookOptions, HookResult } from "../../types";
 import { spawn } from "node:child_process";
 import path from "node:path";
 import fs from "node:fs";
 import logger from "../logger";
 import { checkGit, getCommitMessage, getCurrentBranch } from "./git";
-import { HOOKS } from "../constants";
+import { GIT_SENTRY_FILE_NAME, HOOKS } from "../constants";
 import { startSpinner, stopSpinner } from "./spinner";
 
 /**
@@ -329,7 +329,7 @@ const addHooks = () => {
 };
 
 /**
- * Creates a default `.gitsentryrc` configuration file in the current project.
+ * Creates a default configuration file in the current project.
  *
  * - Checks if the configuration file already exists and skips creation if so.
  * - Generates a sample configuration with common Git hooks and options.
@@ -338,10 +338,10 @@ const addHooks = () => {
  * @returns {void}
  */
 const createDefaultConfig = () => {
-  const configPath = path.join(process.cwd(), ".gitsentryrc");
+  const configPath = path.join(process.cwd(), GIT_SENTRY_FILE_NAME);
 
   if (fs.existsSync(configPath)) {
-    logger.info("'.gitsentryrc' already exists, skipping creation.");
+    logger.info(`'${GIT_SENTRY_FILE_NAME}' already exists, skipping creation.`);
     return;
   }
 
@@ -375,7 +375,7 @@ const createDefaultConfig = () => {
   };
 
   fs.writeFileSync(configPath, JSON.stringify(defaultConfig, null, 2), "utf8");
-  logger.info("Created default '.gitsentryrc' with sample hooks.");
+  logger.info(`Created default '${GIT_SENTRY_FILE_NAME}' with sample hooks.`);
 };
 
 export { addHooks, runCommands, createDefaultConfig };

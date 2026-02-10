@@ -1,4 +1,4 @@
-import { addHooks, createDefaultConfig } from "@/helpers/utils/commands";
+import { addHooks, createDefaultConfig } from "../helpers/utils/commands";
 
 /**
  * Initializes the Git Sentry plugin in the current project.
