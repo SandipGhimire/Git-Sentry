@@ -44,5 +44,19 @@
     "typescript-eslint": "^8.53.0",
     "vitest": "^4.0.18"
   },
-  "keywords": []
+  "keywords": [
+    "git",
+    "hooks",
+    "git-hooks",
+    "automation",
+    "workflow",
+    "pre-commit",
+    "pre-push",
+    "commit-msg",
+    "lint",
+    "test",
+    "config-driven",
+    "dev-tools",
+    "gitsentry"
+  ]
 }
