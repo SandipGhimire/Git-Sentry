@@ -45,7 +45,7 @@ export interface ColoredSegment {
  */
 export interface HookResult {
   hook: string;
-  status: "created" | "appended" | "exists" | "failed";
+  status: "created" | "appended" | "exists" | "failed" | "updated";
   message: string;
 }
 
