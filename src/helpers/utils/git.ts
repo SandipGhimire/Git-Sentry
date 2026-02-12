@@ -23,8 +23,6 @@ const checkGit = () => {
  * @param {string} hook - The Git hook file to check for (e.g., 'pre-commit', 'post-commit').
  */
 const checkHook = (hook: string) => {
-  const gitDir = path.join(process.cwd(), ".git");
-
   if (!HOOKS.includes(hook)) {
     logger.color("cyan", "");
     logger.error(
@@ -34,7 +32,7 @@ const checkHook = (hook: string) => {
   }
 
   if (hook) {
-    const hooksDir = path.join(gitDir, "hooks");
+    const hooksDir = path.join(process.cwd(), ".gitsentry");
     const hookFile = path.join(hooksDir, hook);
 
     if (!fs.existsSync(hookFile)) {

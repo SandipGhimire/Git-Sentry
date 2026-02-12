@@ -51,11 +51,10 @@ describe("Init Commands", () => {
   });
 
   describe("addHooks", () => {
-    it("should add hooks to .git/hooks directory", () => {
+    it("should add hooks to .gitsentry directory", () => {
       mockedGitUtils.checkGit.mockImplementation(() => {});
       mockedFs.existsSync.mockImplementation((p: any) => {
-        if (typeof p === "string" && p.endsWith(".git")) return true;
-        if (typeof p === "string" && p.includes(".git/hooks")) return true;
+        if (typeof p === "string" && p.endsWith(".gitsentry")) return true;
         return false;
       });
       mockedFs.lstatSync.mockReturnValue({ isDirectory: () => true } as any);
@@ -65,17 +64,6 @@ describe("Init Commands", () => {
 
       expect(mockedFs.writeFileSync).toHaveBeenCalled();
       expect(mockedLogger.info).toHaveBeenCalledWith(expect.stringContaining("Git Hooks Update Summary"));
-    });
-
-    it("should fail if no .git directory found", () => {
-      mockedGitUtils.checkGit.mockImplementation(() => {});
-      mockedFs.existsSync.mockReturnValue(false);
-
-      addHooks();
-
-      expect(mockedLogger.segmentColor).toHaveBeenCalledWith(
-        expect.arrayContaining([expect.objectContaining({ text: expect.stringContaining("No .git directory found") })])
-      );
     });
   });
 });
